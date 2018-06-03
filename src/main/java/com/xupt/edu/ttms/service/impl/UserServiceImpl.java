@@ -19,7 +19,7 @@ public class UserServiceImpl  implements UserService{
     UserMapper userMapper;
 
     @Override
-    public List<User> lsit() {
+    public List<User> list() {
         return userMapper.list();
     }
 }
