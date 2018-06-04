@@ -23,6 +23,6 @@ public class UserController {
     public String list(Model model){
         List<User> cs= userService.list();
         model.addAttribute("cs", cs);//填充Jsp代码中的变量
-        return "admin/listCategory";
+        return "user/user";
     }
 }

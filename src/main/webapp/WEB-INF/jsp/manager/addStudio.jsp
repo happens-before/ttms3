@@ -1,6 +1,8 @@
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>票务管理系统</title>
   <script src="js/jquery-2.1.0.js"></script>
@@ -13,7 +15,7 @@
     pageEncoding="UTF-8" %>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <%@ page import="java.util.List" %>
-  <%@page import="xupt.edu.ttms.model.Employee"%>
+  <%@page import="xupt.edu.ttms.model.Studio"%>
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
@@ -41,44 +43,53 @@
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item ">
-          <a href="studio?method=searchByPage">演出厅管理</a>
+          <a href="../studio?method=searchByPage">演出厅管理</a>
         </li>
         <li class="layui-nav-item ">
           <a href="../employee?method=searchByPage">员工信息</a>
         </li> 
         <li class="layui-nav-item ">
-          <a href="../user?method=findAll">权限登陆信息</a>
+          <a href="../../user?method=findAll">权限登陆信息</a>
         </li>  
       </ul>
     </div>
   </div>
   <!-- 增加员工信息 -->
         <div class="col-md-10" style="margin-left: 150px;margin-top: 30px;">
-            <form class="form-horizontal" role="form" action="../user?method=add" method="post">
+            <form class="form-horizontal" role="form" action="../studio?method=add" method="post">
                 <div class="form-group">
-                    <label for="emp_no" class="col-sm-2 control-label">用户编号</label>
+                    <label for="studio_name" class="col-sm-2 control-label">演出厅名称</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="emp_no" name="emp_no" 
-                            placeholder="请输入大小写字母和数字,长度6-20位" pattern="[a-zA-Z0-9]{6,20}" 
-                            required="required" oninvalid="setCustomValidity('请输入大小写字母和数字,长度6-20位!')" 
+                        <input type="text" class="form-control" id="studio_name" name="studio_name" 
+                            placeholder="请输入演出厅名称" pattern="[a-zA-Z0-9]{6,20}" 
+                            required="required" oninvalid="setCustomValidity('请输入演出厅名称')" 
                             oninput="setCustomValidity('')" >
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="emp_name" class="col-sm-2 control-label">密码</label>
+                    <label for="studio_row_count" class="col-sm-2 control-label">行数</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" id="emp_pass" name="emp_pass"
-                            placeholder="请输入密码,10字以内!" pattern="^(0|[1-9][0-9]*)"
-                            required="required" oninvalid="setCustomValidity('请输入密码,10字以内!')"
+                        <input type="text" class="form-control" id="studio_row_count" name="studio_row_count"
+                            placeholder="请输入演出厅行数" pattern="^[0-9]*"
+                            required="required" oninvalid="setCustomValidity('请输入演出厅行数')"
                             oninput="setCustomValidity('')" >
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="emp_tel_num" class="col-sm-2 control-label">用户类型</label>
+                    <label for="studio_col_count" class="col-sm-2 control-label">列数</label>
                     <div class="col-sm-6">
-                        <input type="tel" class="form-control" id="type" name="type"
-                            placeholder="管理员为1，普通员工为0" pattern="^[0-9]*" 
-                            required="required" oninvalid="setCustomValidity('管理员为1，普通员工为0')"
+                        <input type="tel" class="form-control" id="studio_col_count" name="studio_col_count"
+                            placeholder="请输入演出厅列数" pattern="^[0-9]*" 
+                            required="required" oninvalid="setCustomValidity('请输入演出厅列数!')"
+                            oninput="setCustomValidity('')">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="studio_introduction" class="col-sm-2 control-label">介绍</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" id="studio_introduction" name="studio_introduction"
+                            placeholder="请介绍演出厅" pattern=".{2,30}" 
+                            required="required" oninvalid="setCustomValidity('请介绍演出厅!')"
                             oninput="setCustomValidity('')">
                     </div>
                 </div>

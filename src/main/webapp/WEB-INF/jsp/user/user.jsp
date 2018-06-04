@@ -2,8 +2,9 @@
          pageEncoding="UTF-8" import="java.util.*"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="../include/user/UserHeader.jsp"%>
 <%@include file="../include/user/UserNavigator.jsp"%>
-<title>权限信息管理</title>
+<title>权限登陆信息</title>
 <div style="padding: 25px;">
     <table class="table table-bordered" id="tab" style="width: 1460px; margin-left: 200px;">
         <tbody id="tbody">
@@ -20,10 +21,10 @@
                 <td>${c.emp_pass}</td>
                 <td>${c.type}</td>
                 <td>
-                    <a href="user_edit?id=${c.id}">修改</a>
+                    <a href="user_edit?id=${c.emp_no}">修改</a>
                 </td>
                 <td >
-                    <a deleteLink="true" href="user_delete?id=${c.id}">删除</a>
+                    <a deleteLink="true" href="user_delete?id=${c.emp_no}">删除</a>
                 </td>
             </tr>
         </c:forEach>/
@@ -32,3 +33,4 @@
 </div>
 </div>
 </div>
+<%@include file="../include/user/UserFooter.jsp"%>

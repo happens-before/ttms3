@@ -9,7 +9,6 @@ public class User {
     private String emp_no;
     private String emp_pass;
     private int type;
-    private String head_path;
 
     public String getEmp_no() {
         return emp_no;
@@ -35,11 +34,4 @@ public class User {
         this.type = type;
     }
 
-    public String getHead_path() {
-        return head_path;
-    }
-
-    public void setHead_path(String head_path) {
-        this.head_path = head_path;
-    }
 }

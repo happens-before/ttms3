@@ -10,7 +10,7 @@
     <!--启动注解识别-->
     <context:annotation-config/>
 
-    <context:component-scan base-package="com.how2java.tmall.controller">
+    <context:component-scan base-package="com.xupt.edu.ttms.controller">
         <context:include-filter type="annotation"
                                 expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>

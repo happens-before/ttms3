@@ -49,7 +49,7 @@
           <a href="../employee?method=searchByPage">员工信息</a>
         </li> 
         <li class="layui-nav-item ">
-          <a href="../user?method=findAll">权限登陆信息</a>
+          <a href="../../user?method=findAll">权限登陆信息</a>
         </li>  
       </ul>
     </div>
