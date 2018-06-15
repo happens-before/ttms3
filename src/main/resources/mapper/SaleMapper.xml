@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xupt.edu.ttms.mapper.SaleMapper">
+  <resultMap id="BaseResultMap" type="com.xupt.edu.ttms.pojo.Sale">
+    <id column="sale_ID" jdbcType="BIGINT" property="sale_ID" />
+    <result column="emp_id" jdbcType="INTEGER" property="emp_id" />
+    <result column="sale_time" jdbcType="TIMESTAMP" property="sale_time" />
+    <result column="sale_payment" jdbcType="DECIMAL" property="sale_payment" />
+    <result column="sale_change" jdbcType="DECIMAL" property="sale_change" />
+    <result column="sale_type" jdbcType="SMALLINT" property="sale_type" />
+    <result column="sale_status" jdbcType="SMALLINT" property="sale_status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sale_ID, emp_id, sale_time, sale_payment, sale_change, sale_type, sale_status
+  </sql>
+  <select id="selectByExample" parameterType="com.xupt.edu.ttms.pojo.SaleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sale
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sale
+    where sale_ID = #{sale_ID,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sale
+    where sale_ID = #{sale_ID,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="sale_ID" keyProperty="sale_ID" parameterType="com.xupt.edu.ttms.pojo.Sale" useGeneratedKeys="true">
+    insert into sale (emp_id, sale_time, sale_payment, 
+      sale_change, sale_type, sale_status
+      )
+    values (#{emp_id,jdbcType=INTEGER}, #{sale_time,jdbcType=TIMESTAMP}, #{sale_payment,jdbcType=DECIMAL}, 
+      #{sale_change,jdbcType=DECIMAL}, #{sale_type,jdbcType=SMALLINT}, #{sale_status,jdbcType=SMALLINT}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="sale_ID" keyProperty="sale_ID" parameterType="com.xupt.edu.ttms.pojo.Sale" useGeneratedKeys="true">
+    insert into sale
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="emp_id != null">
+        emp_id,
+      </if>
+      <if test="sale_time != null">
+        sale_time,
+      </if>
+      <if test="sale_payment != null">
+        sale_payment,
+      </if>
+      <if test="sale_change != null">
+        sale_change,
+      </if>
+      <if test="sale_type != null">
+        sale_type,
+      </if>
+      <if test="sale_status != null">
+        sale_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="emp_id != null">
+        #{emp_id,jdbcType=INTEGER},
+      </if>
+      <if test="sale_time != null">
+        #{sale_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sale_payment != null">
+        #{sale_payment,jdbcType=DECIMAL},
+      </if>
+      <if test="sale_change != null">
+        #{sale_change,jdbcType=DECIMAL},
+      </if>
+      <if test="sale_type != null">
+        #{sale_type,jdbcType=SMALLINT},
+      </if>
+      <if test="sale_status != null">
+        #{sale_status,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xupt.edu.ttms.pojo.Sale">
+    update sale
+    <set>
+      <if test="emp_id != null">
+        emp_id = #{emp_id,jdbcType=INTEGER},
+      </if>
+      <if test="sale_time != null">
+        sale_time = #{sale_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sale_payment != null">
+        sale_payment = #{sale_payment,jdbcType=DECIMAL},
+      </if>
+      <if test="sale_change != null">
+        sale_change = #{sale_change,jdbcType=DECIMAL},
+      </if>
+      <if test="sale_type != null">
+        sale_type = #{sale_type,jdbcType=SMALLINT},
+      </if>
+      <if test="sale_status != null">
+        sale_status = #{sale_status,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where sale_ID = #{sale_ID,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xupt.edu.ttms.pojo.Sale">
+    update sale
+    set emp_id = #{emp_id,jdbcType=INTEGER},
+      sale_time = #{sale_time,jdbcType=TIMESTAMP},
+      sale_payment = #{sale_payment,jdbcType=DECIMAL},
+      sale_change = #{sale_change,jdbcType=DECIMAL},
+      sale_type = #{sale_type,jdbcType=SMALLINT},
+      sale_status = #{sale_status,jdbcType=SMALLINT}
+    where sale_ID = #{sale_ID,jdbcType=BIGINT}
+  </update>
+</mapper>

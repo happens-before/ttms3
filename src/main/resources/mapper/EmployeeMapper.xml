@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xupt.edu.ttms.mapper.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.xupt.edu.ttms.pojo.Employee">
+    <id column="emp_id" jdbcType="INTEGER" property="emp_id" />
+    <result column="emp_no" jdbcType="VARCHAR" property="emp_no" />
+    <result column="emp_name" jdbcType="VARCHAR" property="emp_name" />
+    <result column="emp_tel_num" jdbcType="VARCHAR" property="emp_tel_num" />
+    <result column="emp_addr" jdbcType="VARCHAR" property="emp_addr" />
+    <result column="emp_email" jdbcType="VARCHAR" property="emp_email" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    emp_id, emp_no, emp_name, emp_tel_num, emp_addr, emp_email
+  </sql>
+  <select id="selectByExample" parameterType="com.xupt.edu.ttms.pojo.EmployeeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where emp_id = #{emp_id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee
+    where emp_id = #{emp_id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="emp_id" keyProperty="emp_id" parameterType="com.xupt.edu.ttms.pojo.Employee" useGeneratedKeys="true">
+    insert into employee (emp_no, emp_name, emp_tel_num, 
+      emp_addr, emp_email)
+    values (#{emp_no,jdbcType=VARCHAR}, #{emp_name,jdbcType=VARCHAR}, #{emp_tel_num,jdbcType=VARCHAR}, 
+      #{emp_addr,jdbcType=VARCHAR}, #{emp_email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="emp_id" keyProperty="emp_id" parameterType="com.xupt.edu.ttms.pojo.Employee" useGeneratedKeys="true">
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="emp_no != null">
+        emp_no,
+      </if>
+      <if test="emp_name != null">
+        emp_name,
+      </if>
+      <if test="emp_tel_num != null">
+        emp_tel_num,
+      </if>
+      <if test="emp_addr != null">
+        emp_addr,
+      </if>
+      <if test="emp_email != null">
+        emp_email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="emp_no != null">
+        #{emp_no,jdbcType=VARCHAR},
+      </if>
+      <if test="emp_name != null">
+        #{emp_name,jdbcType=VARCHAR},
+      </if>
+      <if test="emp_tel_num != null">
+        #{emp_tel_num,jdbcType=VARCHAR},
+      </if>
+      <if test="emp_addr != null">
+        #{emp_addr,jdbcType=VARCHAR},
+      </if>
+      <if test="emp_email != null">
+        #{emp_email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xupt.edu.ttms.pojo.Employee">
+    update employee
+    <set>
+      <if test="emp_no != null">
+        emp_no = #{emp_no,jdbcType=VARCHAR},
+      </if>
+      <if test="emp_name != null">
+        emp_name = #{emp_name,jdbcType=VARCHAR},
+      </if>
+      <if test="emp_tel_num != null">
+        emp_tel_num = #{emp_tel_num,jdbcType=VARCHAR},
+      </if>
+      <if test="emp_addr != null">
+        emp_addr = #{emp_addr,jdbcType=VARCHAR},
+      </if>
+      <if test="emp_email != null">
+        emp_email = #{emp_email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where emp_id = #{emp_id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xupt.edu.ttms.pojo.Employee">
+    update employee
+    set emp_no = #{emp_no,jdbcType=VARCHAR},
+      emp_name = #{emp_name,jdbcType=VARCHAR},
+      emp_tel_num = #{emp_tel_num,jdbcType=VARCHAR},
+      emp_addr = #{emp_addr,jdbcType=VARCHAR},
+      emp_email = #{emp_email,jdbcType=VARCHAR}
+    where emp_id = #{emp_id,jdbcType=INTEGER}
+  </update>
+</mapper>
